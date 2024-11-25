@@ -34,9 +34,39 @@ export const UserDetailsValidation = z.object({
   nationalIdNumber: z.string().optional(),
   availability: z.string().optional(),
   aircondition: z.string().optional(),
+  maxPassengers: z.string().optional(),
   driverImage: z.custom<File[]>().optional(),
   vehicleImage1: z.custom<File[]>().optional(),
   vehicleImage2: z.custom<File[]>().optional(),
   vehicleImage3: z.custom<File[]>().optional(),
   vehicleImage4: z.custom<File[]>().optional(),
+});
+
+export const BookingFormValidation = z.object({
+  customerName: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be at most 50 characters"),
+  customerPhone: z
+    .string()
+    .refine((phone) => /^\+\d{10,15}$/.test(phone), "Invalid phone number"),
+  pickUpLocation: z
+    .string()
+    .min(2, "Address must be at least 2 characters")
+    .max(50, "Address must be at most 50 characters"),
+  destination: z
+    .string()
+    .min(2, "Destination must be at least 2 characters")
+    .max(50, "Destination must be at most 50 characters"), 
+  days: z.string().optional(),
+  driverId: z.string().optional(),
+  detailId: z.string().optional(),
+  vehicleRegNumber: z.string().optional(),
+  priceKm: z.string().optional(),
+  distance: z.string().optional(),
+  amount: z.string().optional(),
+  bookingFee: z.string().optional(),
+  driverAmount: z.string().optional(),
+  pickUpDate: z.coerce.date(),
+  pickUpTime: z.string().optional(),
 });

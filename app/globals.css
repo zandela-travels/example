@@ -180,6 +180,41 @@
   .text-12-semibold {
     @apply text-[12px] leading-[16px] font-semibold;
   }
+  
+  .underline-animation {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #FFD700; /* Yellow color */
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+  
+  .underline-animation:hover::after {
+    width: 100%;
+    left: 0;
+  }
+
+  .border-blue{
+    border: 1px solid #0cc0df;
+  }
+  
+  .blue-btn{
+    border: 1px solid #0cc0df;
+    color: #0cc0df;
+  }
+
+  .blue-btn:hover{
+    background-color: #0cc0df;
+    color: white;
+  }
 
   .embla {
     overflow: hidden;
@@ -193,6 +228,7 @@
     position: relative;
     flex: 0 0 100%;
   }
+
   
 
   /* =====  SHADCN OVERRIDES */
@@ -289,6 +325,8 @@
   .date-picker {
     @apply overflow-hidden border-transparent w-full placeholder:text-dark-600  h-11 text-14-medium rounded-md px-3 outline-none !important;
   }
+
+
 }
 
 /* =====  REACT-DATEPICKER OVERRIDES */

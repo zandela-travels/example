@@ -83,7 +83,7 @@ const Page = () => {
   return (
     <>
       <NavBar />
-      <div className="bg-navbackImg bg-cover bg-no-repeat min-h-screen">
+      <div className="bg-backgroundImg bg-cover bg-no-repeat min-h-screen">
         <div className="container mx-auto p-6">
           {/* Header */}
           <div className='w-full h-96 flex flex-col items-center justify-center text-white-500 relative mb-2'>
@@ -104,7 +104,7 @@ const Page = () => {
           {driver && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Left Side - Details */}
-              <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="bg-white-500 p-6 rounded-lg shadow-lg">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_BUCKET_ID}/files/${driver.driverImage}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`}
                   alt="Car 1"
@@ -122,7 +122,7 @@ const Page = () => {
                   <li>Air Condition: {driver.aircondition}</li>
                 </ul>
                 <div className="mt-6 flex justify-between items-center">
-                  <button className="px-4 py-2 bg-orange-500 text-white font-bold rounded-md hover:bg-orange-600" onClick={() => handleEdit(driver.userId, documentId as string, driver.vehicleRegNumber, driver.price)}>
+                  <button className="px-4 py-2 blue-btn font-bold rounded-md" onClick={() => handleEdit(driver.userId, documentId as string, driver.vehicleRegNumber, driver.price)}>
                     Book Now
                   </button> 
                 </div>
@@ -191,9 +191,9 @@ const Page = () => {
       {selectedDriverId && selectedDriver && selectedVehicle && price && (
         <div>
           <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="bg-sideImg text-white-500 shad-dialog h-[80%] w-[140%] sm:max-w-md overflow-hidden overflow-y-scroll remove-scrollbar">
+            <DialogContent className="bg-footerImg text-white-500 shad-dialog h-[80%] sm:max-w-md overflow-hidden overflow-y-scroll remove-scrollbar">
               <DialogHeader className="mb-4 space-y-3">
-                <DialogTitle className="capitalize text-2xl font-bold">Customer Information</DialogTitle>
+                <DialogTitle className="capitalize text-2xl font-bold text-left text-[#0ccdf0]">Customer Information</DialogTitle>
               </DialogHeader>
               <Bookings userId={selectedDriverId} documentId={selectedDriver} setOpen={setOpen} vehicleId={selectedVehicle} price={price}/>
             </DialogContent>

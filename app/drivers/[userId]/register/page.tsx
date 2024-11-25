@@ -3,17 +3,23 @@
 import React, { useEffect, useState } from 'react';
 import AddUserDetails from '@/components/Forms/AddUserDetails';
 import { getUser } from '@/lib/actions/user.actions';
+import { useParams } from 'next/navigation';
 
-const Register = ({ params }: { params: { userId: string } }) => {
+const Register = () => {
+    const params = useParams();
     const [user, setUser] = useState(null);
 
     useEffect(() => {
         const fetchUser = async () => {
-            const fetchedUser = await getUser(params.userId);
-            if (fetchedUser) {
-                setUser(fetchedUser);
+            if (typeof params.userId === 'string') {
+                const fetchedUser = await getUser(params.userId);
+                if (fetchedUser) {
+                    setUser(fetchedUser);
+                } else {
+                    console.error("User not found or failed to fetch.");
+                }
             } else {
-                console.error("User not found or failed to fetch.");
+                console.error("Invalid userId.");
             }
         };
 

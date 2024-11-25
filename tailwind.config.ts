@@ -13,9 +13,10 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        bannerImg: "url('/assets/images/footer_back.png')",
-        navbackImg: "url('/assets/images/zback.png')",
+        navBarImg: "url('/assets/images/footer_back.png')",
         sideImg: "url('/assets/images/back_image3.png')",
+        backgroundImg: "url('/assets/images/back_4.png')",
+        footerImg: "url('/assets/images/back_2.png')",
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },

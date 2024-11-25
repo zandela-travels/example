@@ -129,6 +129,24 @@ export const registerDriver = async ({ driverImage, vehicleImage1, vehicleImage2
     }
   }
 
+  export const getShownDriver = async () => {
+    try {
+        const drivers = await databases.listDocuments(
+            DATABASE_ID!,
+            USER_DATA_COLLECTION_ID!,
+            [
+                Query.orderDesc('$createdAt'),
+                Query.equal('status', 'show')
+            ]
+        );
+
+        return parseStringify(drivers.documents);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
   export const getDriverById = async (documentId: string) => {
     if (!documentId) {
       console.error("Document ID is missing.");

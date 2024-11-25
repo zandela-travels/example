@@ -31,6 +31,7 @@ export const DriverFormDefaultValues = {
   licenseNumber: "",
   availability: "",
   aircondition: "",
+  maxPassengers: "",
   driverImage: [],
   vehicleImage1: [],
   vehicleImage2: [],

@@ -12,7 +12,6 @@ import { UserDetailsValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
 import { registerDriver } from "@/lib/actions/user.actions"
 import { Towns, DriverFormDefaultValues, VehicleTypes, AvailabiilityTypes, AcTypes } from "@/constants"
-import { Label } from "../ui/label"
 import { SelectItem } from "../ui/select"
 import FileUploader from "../FileUploader"
 import { User } from "@/types"
@@ -124,7 +123,7 @@ const AddUserDetails = ({ user }: { user: User }) => {
 
   return (
   <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 flex-1">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 flex-1 text-white-500">
 
       <section className="space-y-6">
        <div className="mb-9 spac-y-1">
@@ -160,6 +159,15 @@ const AddUserDetails = ({ user }: { user: User }) => {
           name="age"      
           label="Driver Age"
           placeholder="30"
+          iconAlt=""
+      />
+
+      <CustomFormField
+          fieldType={formFieldType.INPUT}
+          control={form.control} 
+          name="maxPassengers"      
+          label="Max Passengers"
+          placeholder="9"
           iconAlt=""
       />
 

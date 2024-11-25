@@ -76,7 +76,7 @@ export default function Home() {
         </div>
       </div>
     </div>*/
-    <main className={`${inter.className} relative min-h-screen select-none overflow-hidden text-white antialiased`}>
+    <main className={`${inter.className} relative min-h-screen select-none overflow-hidden text-white-500 antialiased`}>
       <AnimatePresence>
         <BackgroundImage 
           transitionData={transitionData}
