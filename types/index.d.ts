@@ -38,6 +38,7 @@ declare type UpdateDriverParams = {
 
 declare type BookingParams = {
   driverId: string,
+  driverName: string,
   detailId: string,
   customerName: string,
   customerPhone: string,

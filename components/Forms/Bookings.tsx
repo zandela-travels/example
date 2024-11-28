@@ -21,7 +21,7 @@ export enum formFieldType {
     SKELETON = 'skeleton',
 }
 
-const Bookings = ({ userId, documentId, vehicleId, price, setOpen }: { userId: string, documentId: string, vehicleId: string, price: string, setOpen: (open: boolean) => void; }) => {
+const Bookings = ({ userId, documentId, vehicleId, price, driverName, setOpen }: { userId: string, documentId: string, vehicleId: string, price: string, driverName: string, setOpen: (open: boolean) => void; }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,6 +30,7 @@ const Bookings = ({ userId, documentId, vehicleId, price, setOpen }: { userId: s
     defaultValues: {
       driverId: userId,
       detailId: documentId,
+      driverName: driverName,
       customerName: "",
       customerPhone: "",
       pickUpLocation: "",
@@ -70,15 +71,15 @@ const Bookings = ({ userId, documentId, vehicleId, price, setOpen }: { userId: s
 
   async function onSubmit(values: z.infer<typeof BookingFormValidation>) {
     setIsLoading(true);
-    // Add your submit logic here
+    
     try {
-      const bookingData = { driverId: values.driverId || "", detailId: values.detailId || "", customerName: values.customerName, customerPhone: values.customerPhone, pickUpLocation: values.pickUpLocation, destination: values.destination, vehicleRegNumber: values.vehicleRegNumber || "", days: values.days || "", pickUpDate: new Date(values.pickUpDate), pickUpTime: values.pickUpTime || "", distance: values.distance || "", priceKm: values.priceKm || "", amount: values.amount || "", bookingFee: values.bookingFee || "", driverAmount: values.driverAmount || "", };
+      const bookingData = { driverId: values.driverId || "", driverName: values.driverName || "", detailId: values.detailId || "", customerName: values.customerName, customerPhone: values.customerPhone, pickUpLocation: values.pickUpLocation, destination: values.destination, vehicleRegNumber: values.vehicleRegNumber || "", days: values.days || "", pickUpDate: new Date(values.pickUpDate), pickUpTime: values.pickUpTime || "", distance: values.distance || "", priceKm: values.priceKm || "", amount: values.amount || "", bookingFee: values.bookingFee || "", driverAmount: values.driverAmount || "", };
 
       const book = await createBooking(bookingData)
 
       if (book) {
         alert('Details submitted succesfully')
-        router.push(`/successpage`)
+        router.push(`/driverDetails/${documentId}/details/success?bookingId=${book.$id}`)
       }
     } catch (error) {
       console.log(error);

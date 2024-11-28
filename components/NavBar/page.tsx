@@ -17,8 +17,8 @@ const inter = Righteous({
 const navigation = [
   { id: 1, name: 'Home', href: '/' },
   { id: 2, name: 'Book a Ride', href: '/Goride' },
-  { id: 3, name: 'Privacy Policy', href: '#' },
-  { id: 4, name: 'Terms and Conditions', href: '#' },
+  { id: 3, name: 'Privacy Policy', href: '/PrivacyPolicy' },
+  { id: 4, name: 'Terms and Conditions', href: '/Terms&Conditions' },
 ];
 
 export default function NavBar() {
@@ -49,7 +49,7 @@ export default function NavBar() {
             <img
               alt="Logo"
               src="/assets/images/nav logom.png"
-              className="h-9 w-auto md:h-7"
+              className="h-10 w-auto md:h-12"
             />
           </a>
         </div>

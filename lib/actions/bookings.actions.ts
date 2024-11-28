@@ -5,13 +5,13 @@ import { BUCKET_ID, DATABASE_ID, databases, ENDPOINT, BOOKINGS_DATA_COLLECTION_I
 import { parseStringify } from "../utils"
 import { BookingParams } from "@/types"
 
-export const createBooking = async (appointment: BookingParams) => {
+export const createBooking = async (bookings: BookingParams) => {
     try {
         const newBooking = await databases.createDocument(
             DATABASE_ID!,
             BOOKINGS_DATA_COLLECTION_ID!,
             ID.unique(),
-            appointment
+            bookings
           )
       
           return parseStringify(newBooking);  

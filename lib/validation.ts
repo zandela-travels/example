@@ -60,6 +60,7 @@ export const BookingFormValidation = z.object({
     .max(50, "Destination must be at most 50 characters"), 
   days: z.string().optional(),
   driverId: z.string().optional(),
+  driverName: z.string().optional(),
   detailId: z.string().optional(),
   vehicleRegNumber: z.string().optional(),
   priceKm: z.string().optional(),

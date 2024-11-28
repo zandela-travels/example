@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import React, { useState } from 'react'
 
@@ -33,8 +35,8 @@ const Footer = () => {
             <ul className='text-lg text-center lg:text-left'>
               <a className='hover:text-yellow-400' href='/'><li>Home</li></a>
               <a className='hover:text-yellow-400' href='/Goride'><li>Book a Ride</li></a>
-              <a className='hover:text-yellow-400' href='/'><li>Privacy Policy</li></a>
-              <a className='hover:text-yellow-400' href='/'><li>Terms & Conditions</li></a>
+              <a className='hover:text-yellow-400' href='/PrivacyPolicy'><li>Privacy Policy</li></a>
+              <a className='hover:text-yellow-400' href='/Terms&Conditions'><li>Terms & Conditions</li></a>
             </ul>
           </div>
           <div className='flex flex-col items-center lg:items-start mt-8 lg:mt-0 lg:w-1/2'>

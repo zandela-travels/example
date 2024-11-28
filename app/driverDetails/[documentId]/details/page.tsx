@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dialog"
 
 type DriverDe = {
-  $id: string;
   driverImage: string;
   vehicleImage1: string;
   vehicleImage2: string;
@@ -44,6 +43,7 @@ const Page = () => {
   const [driver, setDriver] = useState<DriverDe | null>(null);
   const [selectedDriverId, setSelectedDriverId] = useState<string | null>(null);
   const [selectedDriver, setSelectedDriver] = useState<string | null>(null);
+  const [selectedDriverName, setSelectedDriverName] = useState<string | null>(null);
   const [selectedVehicle, setSelectedVehicle] = useState<string | null>(null);
   const [price, setPrice] = useState<string | null>(null);
 
@@ -53,7 +53,6 @@ const Page = () => {
       const driverData = await getDriverById(documentId as string);
 
       if (driverData) {
-        console.log(driverData);
         setDriver(driverData);
       } else {
         console.log('not fetched');
@@ -72,11 +71,12 @@ const Page = () => {
     }
   }, [emblaApi]);
 
-  const handleEdit = (userId: string, documentId: string, vehicleId: string, price: string) => {
+  const handleEdit = (userId: string, documentId: string, vehicleId: string, price: string, driverName: string) => {
     setSelectedDriverId(userId);
     setSelectedDriver(documentId);
     setSelectedVehicle(vehicleId);
-    setPrice(price)
+    setSelectedDriverName(driverName);
+    setPrice(price);
     setOpen(true);
   };
 
@@ -122,7 +122,7 @@ const Page = () => {
                   <li>Air Condition: {driver.aircondition}</li>
                 </ul>
                 <div className="mt-6 flex justify-between items-center">
-                  <button className="px-4 py-2 blue-btn font-bold rounded-md" onClick={() => handleEdit(driver.userId, documentId as string, driver.vehicleRegNumber, driver.price)}>
+                  <button className="px-4 py-2 blue-btn font-bold rounded-md" onClick={() => handleEdit(driver.userId, documentId as string, driver.vehicleRegNumber, driver.price, driver.name)}>
                     Book Now
                   </button> 
                 </div>
@@ -188,14 +188,14 @@ const Page = () => {
         </div>
       </div>
 
-      {selectedDriverId && selectedDriver && selectedVehicle && price && (
+      {selectedDriverId && selectedDriver && selectedVehicle && price && selectedDriverName &&(
         <div>
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className="bg-footerImg text-white-500 shad-dialog h-[80%] sm:max-w-md overflow-hidden overflow-y-scroll remove-scrollbar">
               <DialogHeader className="mb-4 space-y-3">
                 <DialogTitle className="capitalize text-2xl font-bold text-left text-[#0ccdf0]">Customer Information</DialogTitle>
               </DialogHeader>
-              <Bookings userId={selectedDriverId} documentId={selectedDriver} setOpen={setOpen} vehicleId={selectedVehicle} price={price}/>
+              <Bookings userId={selectedDriverId} documentId={selectedDriver} setOpen={setOpen} vehicleId={selectedVehicle} price={price} driverName={selectedDriverName}/>
             </DialogContent>
           </Dialog>
         </div>
