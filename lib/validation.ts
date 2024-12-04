@@ -33,6 +33,7 @@ export const UserDetailsValidation = z.object({
   licenseNumber: z.string().optional(),
   nationalIdNumber: z.string().optional(),
   availability: z.string().optional(),
+  language: z.string().optional(),
   aircondition: z.string().optional(),
   maxPassengers: z.string().optional(),
   driverImage: z.custom<File[]>().optional(),

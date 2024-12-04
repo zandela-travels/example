@@ -11,7 +11,7 @@ import { useState } from "react"
 import { UserDetailsValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
 import { registerDriver } from "@/lib/actions/user.actions"
-import { Towns, DriverFormDefaultValues, VehicleTypes, AvailabiilityTypes, AcTypes } from "@/constants"
+import { Towns, DriverFormDefaultValues, VehicleTypes, AvailabiilityTypes, AcTypes, LanguageTypes } from "@/constants"
 import { SelectItem } from "../ui/select"
 import FileUploader from "../FileUploader"
 import { User } from "@/types"
@@ -185,6 +185,23 @@ const AddUserDetails = ({ user }: { user: User }) => {
             <SelectItem key={town} value={town}>
                 <div className="flex cursor-pointer items-center gap-2">
                     <p>{town}</p>    
+                </div>
+            </SelectItem>
+        ))}
+      </CustomFormField>
+
+      <CustomFormField
+          fieldType={formFieldType.SELECT}
+          control={form.control}
+          name="language"
+          label="Fluent Languages"
+          placeholder="Select a type" 
+          iconAlt=""     
+      >
+        {LanguageTypes.map((lang) => (
+            <SelectItem key={lang} value={lang}>
+                <div className="flex cursor-pointer items-center gap-2">
+                    <p>{lang}</p>    
                 </div>
             </SelectItem>
         ))}

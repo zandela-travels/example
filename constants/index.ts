@@ -21,6 +21,7 @@ export const AcTypes = [
 export const DriverFormDefaultValues = {
   name: "",
   phone: "",
+  language: "",
   age: "",
   location: "Colombo",
   vehicleRegNumber: "",
@@ -38,6 +39,14 @@ export const DriverFormDefaultValues = {
   vehicleImage3: [],
   vehicleImage4: [],
 };
+
+export const LanguageTypes = [
+  "Sinhala",
+  "English",
+  "Tamil",
+  "Sinhala/English",
+  "Sinhala/English/Tamil",
+]
 
 export const Towns = [
   'Colombo', 'Dehiwala-Mount-Lavinia', 'Moratuwa', 'Battaramulla', 'Maharagama', 

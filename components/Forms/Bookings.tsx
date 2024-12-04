@@ -89,12 +89,6 @@ const Bookings = ({ userId, documentId, vehicleId, price, driverName, setOpen }:
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 flex-1">
-        <section className="space-y-6">
-          <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Booking Information</h2>
-          </div>
-        </section>
-
         
           <CustomFormField
             fieldType={formFieldType.INPUT}

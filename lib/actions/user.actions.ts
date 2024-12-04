@@ -150,6 +150,7 @@ export const registerDriver = async ({ driverImage, vehicleImage1, vehicleImage2
   export const getDriverById = async (documentId: string) => {
     if (!documentId) {
       console.error("Document ID is missing.");
+      console.log(documentId)
       return null; // Return null or handle accordingly
     }
   

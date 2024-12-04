@@ -19,3 +19,23 @@ export const createBooking = async (bookings: BookingParams) => {
       console.log(error)  
     }
 }
+
+export const getBookingsById = async (bookingId: string) => {
+  if (!bookingId) {
+    console.error("Booking ID is missing.");
+    return null; // Return null or handle accordingly
+  }
+
+  try {
+    const bookingDetails = await databases.getDocument(
+      DATABASE_ID!,
+      BOOKINGS_DATA_COLLECTION_ID!,
+      bookingId
+    );
+
+    return parseStringify(bookingDetails);
+  } catch (error) {
+    console.error(`Error fetching document with ID ${bookingId}:`, error);
+    return null; // Return null or handle accordingly
+  }
+}

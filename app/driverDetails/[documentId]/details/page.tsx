@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import NavBar from '@/components/NavBar/page';
@@ -14,6 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import Footer from '@/components/Footer';
 
 type DriverDe = {
   driverImage: string;
@@ -27,6 +28,11 @@ type DriverDe = {
   phone: string;
   age: string;
   vehicleRegNumber: string;
+  location: string;
+  vehicleModel: string;
+  vehicleType: string;
+  maxPassengers: string;
+  language: string;
   availability: string;
   aircondition: string;
   status: string;
@@ -38,167 +44,134 @@ const Page = () => {
   const [open, setOpen] = useState(false);
   const autoplay = useRef(Autoplay({ delay: 3000 }));
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay.current]);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [driver, setDriver] = useState<DriverDe | null>(null);
-  const [selectedDriverId, setSelectedDriverId] = useState<string | null>(null);
-  const [selectedDriver, setSelectedDriver] = useState<string | null>(null);
-  const [selectedDriverName, setSelectedDriverName] = useState<string | null>(null);
-  const [selectedVehicle, setSelectedVehicle] = useState<string | null>(null);
-  const [price, setPrice] = useState<string | null>(null);
-
 
   useEffect(() => {
     const fetchDriver = async () => {
       const driverData = await getDriverById(documentId as string);
-
-      if (driverData) {
-        setDriver(driverData);
-      } else {
-        console.log('not fetched');
-      }
+      if (driverData) setDriver(driverData);
     };
-
     fetchDriver();
   }, [documentId]);
-
-  useEffect(() => {
-    if (emblaApi) {
-      setScrollSnaps(emblaApi.scrollSnapList());
-      emblaApi.on('select', () => {
-        setSelectedIndex(emblaApi.selectedScrollSnap());
-      });
-    }
-  }, [emblaApi]);
-
-  const handleEdit = (userId: string, documentId: string, vehicleId: string, price: string, driverName: string) => {
-    setSelectedDriverId(userId);
-    setSelectedDriver(documentId);
-    setSelectedVehicle(vehicleId);
-    setSelectedDriverName(driverName);
-    setPrice(price);
-    setOpen(true);
-  };
 
   return (
     <>
       <NavBar />
-      <div className="bg-backgroundImg bg-cover bg-no-repeat min-h-screen">
+      <div className="bg-backgroundImg bg-cover bg-no-repeat min-h-screen flex justify-center">
         <div className="container mx-auto p-6">
-          {/* Header */}
-          <div className='w-full h-96 flex flex-col items-center justify-center text-white-500 relative mb-2'>
-            <Image 
-              src="/assets/images/parkImg.png" // replace with your background image path
-              layout='fill'
-              objectFit='cover'
-              alt='showroom background'
-              className= 'opacity-80 rounded-[50px]'
-            />
-            <div className='absolute text-center'>
-              <h1 className='text-6xl font-bold'>Cars</h1>
-              <p className='text-xl'>Home / Cars</p>
-            </div>
-          </div>
-
-          {/* Content Section */}
           {driver && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Left Side - Details */}
-              <div className="bg-white-500 p-6 rounded-lg shadow-lg">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Left Side - Driver Details */}
+              <div className="bg-white-500 p-6 rounded-[10px] shadow-lg flex flex-col items-center border border-[#0cc0df] h-fit">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_BUCKET_ID}/files/${driver.driverImage}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`}
-                  alt="Car 1"
-                  width={1000}
-                  height={1000}
-                  className="w-[200px] h-[200px] object-cover rounded-full"
+                  alt="Driver"
+                  width={200}
+                  height={200}
+                  className="w-[250px] h-[250px] object-cover rounded-full border border-dark-500"
                 />
-                <div className="text-lg font-semibold mb-4">${driver.price} / Per Day</div>
-                <ul className="space-y-3 text-sm text-gray-700">
-                  <li>Doors: {driver.vehicleRegNumber}</li>
-                  <li>Passengers: 2</li>
-                  <li>Availability: {driver.availability}</li>
-                  <li>Age: {driver.age} Years</li>
-                  <li>Luggage: 2 Bags</li>
-                  <li>Air Condition: {driver.aircondition}</li>
-                </ul>
-                <div className="mt-6 flex justify-between items-center">
-                  <button className="px-4 py-2 blue-btn font-bold rounded-md" onClick={() => handleEdit(driver.userId, documentId as string, driver.vehicleRegNumber, driver.price, driver.name)}>
-                    Book Now
-                  </button> 
+                <div className="text-lg font-bold text-[#0ccdf0] uppercase mt-2 mb-4">{driver.location}</div>
+
+                <div className="space-y-2 text-m text-gray-600 w-full px-4">
+                  <div className="flex justify-between">
+                    <p>Driver Name:</p>
+                    <p>{driver.name}</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p>Driver Age:</p>
+                    <p>{driver.age}</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p>Fluent Languages:</p>
+                    <p>{driver.language}</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p>Vehicle Model:</p>
+                    <p>{driver.vehicleModel}</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p>Vehicle Type:</p>
+                    <p>{driver.vehicleType}</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p>Air Conditioning:</p>
+                    <p>{driver.aircondition}</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p>Passengers:</p>
+                    <p>{driver.maxPassengers}</p>
+                  </div>
                 </div>
+
+                <button
+                  className="mt-6 px-6 py-2 bg-[#0cc0df] text-white-500 font-bold rounded hover:bg-[#0bb0cf] transition duration-300"
+                  onClick={() => setOpen(true)}
+                >
+                  Book Now
+                </button>
               </div>
 
-              {/* Right Side - Embla Carousel */}
-              <div className="relative h-[420px] overflow-hidden overflow-y-scroll remove-scrollbar">
-                <div className="bg-white rounded-[30px] shadow-lg overflow-hidden h-full">
+              {/* Right Side - Embla Carousel and Description */}
+              <div className="col-span-2 space-y-6">
+                {/* Embla Carousel */}
+                <div className="relative overflow-hidden rounded-[10px] shadow-lg bg-white-500">
                   <div ref={emblaRef} className="embla">
                     <div className="embla__container flex">
-                      <div className="embla__slide min-w-full h-[420px]">
-                        <Image
-                          src={`${process.env.NEXT_PUBLIC_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_BUCKET_ID}/files/${driver.vehicleImage1}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`}
-                          alt="Car 1"
-                          layout="fill"
-                          objectFit="cover"
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                      </div>
-                      <div className="embla__slide min-w-full h-[420px]">
-                      <Image
-                          src={`${process.env.NEXT_PUBLIC_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_BUCKET_ID}/files/${driver.vehicleImage2}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`}
-                          alt="Car 1"
-                          layout="fill"
-                          objectFit="cover"
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                      </div>
-                      <div className="embla__slide min-w-full h-[420px]">
-                      <Image
-                          src={`${process.env.NEXT_PUBLIC_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_BUCKET_ID}/files/${driver.vehicleImage3}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`}
-                          alt="Car 1"
-                          layout="fill"
-                          objectFit="cover"
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                      </div>
-                      <div className="embla__slide min-w-full h-[420px]">
-                      <Image
-                          src={`${process.env.NEXT_PUBLIC_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_BUCKET_ID}/files/${driver.vehicleImage4}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`}
-                          alt="Car 1"
-                          layout="fill"
-                          objectFit="cover"
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                      </div>
+                      {[driver.vehicleImage1, driver.vehicleImage2, driver.vehicleImage3, driver.vehicleImage4].map(
+                        (image, index) => (
+                          <div key={index} className="embla__slide min-w-full h-[400px]">
+                            <Image
+                              src={`${process.env.NEXT_PUBLIC_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_BUCKET_ID}/files/${image}/view?project=${process.env.NEXT_PUBLIC_PROJECT_ID}`}
+                              alt={`Vehicle ${index + 1}`}
+                              layout="fill"
+                              objectFit="cover"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )
+                      )}
                     </div>
                   </div>
                 </div>
-                {/* Indicators */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                  {scrollSnaps.map((_, index) => (
-                    <button
-                      key={index}
-                      className={`w-3 h-3 rounded-full ${index === selectedIndex ? 'bg-yellow-500' : 'bg-white-500'}`}
-                      onClick={() => emblaApi && emblaApi.scrollTo(index)}
-                    />
-                  ))}
+
+                {/* Vehicle Description */}
+                <div className="bg-white-500 p-6 rounded-[10px] shadow-lg border border-[#0cc0df]">
+                  <h2 className="text-2xl font-bold text-[#0ccdf0] mb-4">Vehicle Description</h2>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    This vehicle is a {driver.vehicleType} model offering a comfortable experience for up to{' '}
+                    {driver.maxPassengers} passengers. With {driver.aircondition === 'Yes' ? 'air conditioning' : 'no air conditioning'} and a
+                    spacious interior, it is perfect for both city and long-distance trips. Contact {driver.name} for
+                    more details.
+                  </p>
+                  <div className="mt-4 flex items-center justify-between">
+                    <p className="text-lg font-semibold text-gray-800">Price:</p>
+                    <p className="text-lg font-bold text-[#0cc0df]">${driver.price} / day</p>
+                  </div>
                 </div>
               </div>
             </div>
           )}
         </div>
       </div>
+      <Footer />
 
-      {selectedDriverId && selectedDriver && selectedVehicle && price && selectedDriverName &&(
-        <div>
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="bg-footerImg text-white-500 shad-dialog h-[80%] sm:max-w-md overflow-hidden overflow-y-scroll remove-scrollbar">
-              <DialogHeader className="mb-4 space-y-3">
-                <DialogTitle className="capitalize text-2xl font-bold text-left text-[#0ccdf0]">Customer Information</DialogTitle>
-              </DialogHeader>
-              <Bookings userId={selectedDriverId} documentId={selectedDriver} setOpen={setOpen} vehicleId={selectedVehicle} price={price} driverName={selectedDriverName}/>
-            </DialogContent>
-          </Dialog>
-        </div>
+      {/* Booking Dialog */}
+      {driver && (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogContent className="bg-footerImg text-white-500 shad-dialog h-[80%] sm:max-w-md overflow-hidden overflow-y-scroll remove-scrollbar">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold text-[#0cc0df]">Booking Details</DialogTitle>
+            </DialogHeader>
+            <Bookings
+              userId={driver.userId}
+              documentId={documentId as string}
+              vehicleId={driver.vehicleRegNumber}
+              price={driver.price}
+              driverName={driver.name}
+              setOpen={setOpen}
+            />
+          </DialogContent>
+        </Dialog>
       )}
     </>
   );

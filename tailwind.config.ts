@@ -15,6 +15,7 @@ export default {
       backgroundImage: {
         navBarImg: "url('/assets/images/footer_back.png')",
         sideImg: "url('/assets/images/back_image3.png')",
+        cardImg: "url('/assets/images/cardback.png')",
         backgroundImg: "url('/assets/images/back_4.png')",
         footerImg: "url('/assets/images/back_2.png')",
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
